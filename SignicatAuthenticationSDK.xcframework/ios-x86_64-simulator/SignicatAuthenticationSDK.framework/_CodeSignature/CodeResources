@@ -14,19 +14,19 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		K9VEG6U6rWWZhUihmLQaMDacXDo=
+		+QAjkyLHJdkjzv6bjylwhTkETwQ=
 		</data>
 		<key>Modules/SignicatAuthenticationSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		VbQ4SooPvXBpdvqZCabcY7ftFwU=
+		ue0imJrbD3tpw2SdcR1OSB4lnBg=
 		</data>
 		<key>Modules/SignicatAuthenticationSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		gz5o7A6c+xo/M/LjyNcxUacPdrI=
+		8RCN/U9Gz1EsIyJWVJxJruSrm8c=
 		</data>
 		<key>Modules/SignicatAuthenticationSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		mAwnRA5ldRI3Om8sTgRGdQX5IaI=
+		3zkP4uA85RxA7iHyp1RfPpU6x0c=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -53,21 +53,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PD2HY43Lz2npO7RqZwqAg6mKE8SqpESiAgNth4aYQcw=
+			X9ihBdx0fU/W7byQSfKnsGiw71MY6N/K2HFYrQvDB3E=
 			</data>
 		</dict>
 		<key>Modules/SignicatAuthenticationSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7ZvvadQFXjC4tBodGBVj+AMpc2QvfOsgDPmJst6StlU=
+			gpEtBB0mV/b9xGWqoLjzxxBEXkxcB2nNxx3II4cy8Kk=
 			</data>
 		</dict>
 		<key>Modules/SignicatAuthenticationSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Oj5wzfenvitAeP+Hxa1O026hln5wfuAEJt4+hese8Dc=
+			CU3S12nBpaX0PQc7uUrOugE2U9CDdyzla6Z3XgTnnsc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
