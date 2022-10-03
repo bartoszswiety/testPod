@@ -1,0 +1,401 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-ios14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name SignicatAuthenticationSDK
+import EncapSwiftAPI
+import Foundation
+import LocalAuthentication
+import Swift
+import UIKit
+import _Concurrency
+public enum AuthenticationSDKError : Swift.Error {
+  case client(code: SignicatAuthenticationSDK.ClientErrorCodes, description: Swift.String)
+  case server(code: SignicatAuthenticationSDK.ServerErrorCodes, description: Swift.String)
+  public var error: SignicatAuthenticationSDK.AuthenticationSDKError {
+    get
+  }
+  public var errorCode: Swift.String {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  public static func error(_ error: EncapSwiftAPI.ErrorResult) -> SignicatAuthenticationSDK.AuthenticationSDKError
+}
+public enum ClientErrorCodes {
+  case errorOperationInProgress
+  case errorConnectionFailure
+  case errorInvalidResponse
+  case errorInvalidInputFormat
+  case errorNotActivated
+  case errorUnexpected
+  case errorWrongState
+  case errorConfiguration
+  case errorConnectionTimeout
+  case errorNoInternetConnection
+  case errorSecureConnectionCheckFailed
+  case errorInvalidAuthParameters
+  case errorAuthMethodUnavailable
+  case errorAuthMethodNotAllowed
+  case errorAuthenticationFailed
+  case errorAuthenticationAborted
+  case errorAuthDataInvalidated
+  case errorDowngradeDetected
+  case errorRegistrationDataInvalidated
+  case errorOfflineVersionNotSupported
+  case errorOfflineParsingFailed
+  case errorTokenPurposeNotSupported
+  case errorInvalidToken
+  case errorInvalidRecoveryParameters
+  case errorRecoveryDataNotPresent
+  case errorStorage
+  case errorStorageUnavailable
+  case errorIncorrectContextType
+  public static func == (a: SignicatAuthenticationSDK.ClientErrorCodes, b: SignicatAuthenticationSDK.ClientErrorCodes) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ServerErrorCodes {
+  case errorIncorrectActivationCode
+  case errorUnexpected
+  case errorNotRegistered
+  case errorAlreadyAuthenticated
+  case errorNoSession
+  case errorExpiredSession
+  case errorInvalidSession
+  case errorClientOnlyDisallowed
+  case errorIncorrectResponse
+  case errorAuthenticationFailed
+  case errorApplicationIdMismatch
+  case errorServiceUnavailable
+  case errorLockedByAdmin
+  case errorLocked
+  case errorNoMatchingAuthMethod
+  case errorIllegalAuthMethod
+  case errorIllegalAuthFactor
+  case errorAuthenticationRequired
+  case errorAuthMethodNotAllowed
+  case errorNoSessionForPurpose
+  case errorApplicationIdNotFound
+  case errorApiVersionTooOldForServer
+  case errorApiVersionTooNewForServer
+  case errorApiVersionTooOldForAppConfig
+  case errorApiVersionBlacklisted
+  case errorServerToServiceProvider
+  case errorNotParsable
+  case errorMissingParameter
+  case errorMalformedParameter
+  case errorActivationFailed
+  case errorIntermediatePushTimeout
+  case errorIntermediatePushNotEnabled
+  case errorClientRequestTimeOutOfSync
+  case errorReactivationOnUnknownDevice
+  case errorAuthTokenCreationFailed
+  case errorAuthTokenValidationFailed
+  case errorAuthTokenAlreadyUsed
+  case errorRecoveryAlreadyUsed
+  case errorRecoveryDoesNotExist
+  case errorRecoveryDisabled
+  case errorRecoveryLocked
+  case errorInvalidAuthTokenPurpose
+  case errorInvalidAuthLevelForTokenRequest
+  case errorGeofencingBoundaryValidationFailed
+  case errorGeofencingClientFailure
+  case errorAddMethodNotAllowed
+  case errorAppAttestUnexpectedError
+  case errorAppAttestTimeout
+  case errorAppAttestNotSupported
+  case errorAppAttestAppleServerUnavailable
+  case errorAppAttestValidationFailed
+  public static func == (a: SignicatAuthenticationSDK.ServerErrorCodes, b: SignicatAuthenticationSDK.ServerErrorCodes) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers public class DeactivationManager : SignicatAuthenticationSDK.Manager {
+  @_hasMissingDesignatedInitializers public class SignicatDeactivationResult {
+    @objc deinit
+  }
+  public func deactivateDevice(deactivateLocallyOnlyIfOnlineFailed: Swift.Bool, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.DeactivationManager.SignicatDeactivationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  override public init(_ encap: EncapSwiftAPI.EncapController, view: SignicatAuthenticationSDK.SignicatView)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class AuthorizationManager : SignicatAuthenticationSDK.Manager {
+  public class SignicatStartAuthorizationResult {
+    final public let preOperationContext: SignicatAuthenticationSDK.SessionContext?
+    final public let allowedAuthMethods: [SignicatAuthenticationSDK.SignicatAuthMethod]
+    final public let pinConfig: SignicatAuthenticationSDK.SignicatInputConfig
+    public init(_ x: EncapSwiftAPI.StartAuthenticationResult)
+    @objc deinit
+  }
+  public class SignicatFinishAuthorizationResult {
+    final public let postOperationContext: SignicatAuthenticationSDK.SessionContext?
+    public init(_ x: EncapSwiftAPI.FinishAuthenticationResult)
+    @objc deinit
+  }
+  public class SignicatAuthorizeResult {
+    final public let startResult: SignicatAuthenticationSDK.AuthorizationManager.SignicatStartAuthorizationResult?
+    final public let finishResult: SignicatAuthenticationSDK.AuthorizationManager.SignicatFinishAuthorizationResult?
+    public init(start: SignicatAuthenticationSDK.AuthorizationManager.SignicatStartAuthorizationResult, finish: SignicatAuthenticationSDK.AuthorizationManager.SignicatFinishAuthorizationResult)
+    @objc deinit
+  }
+  public func startAuthorization(clientData: Swift.String? = nil, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AuthorizationManager.SignicatStartAuthorizationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  public func finishAuthorization(withAuthMethod: SignicatAuthenticationSDK.SignicatAuthMethod, tokenPurpose: EncapSwiftAPI.TokenPurpose = .none, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AuthorizationManager.SignicatFinishAuthorizationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  override public init(_ encap: EncapSwiftAPI.EncapController, view: SignicatAuthenticationSDK.SignicatView)
+  @objc deinit
+}
+extension SignicatAuthenticationSDK.AuthorizationManager {
+  public func authorize(withPin: Swift.String = "", useBiometrics: Swift.Bool = true, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AuthorizationManager.SignicatAuthorizeResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+}
+@_inheritsConvenienceInitializers public class AddOrUpdateManager : SignicatAuthenticationSDK.Manager {
+  @_hasMissingDesignatedInitializers public class SignicatStartAddOrUpdateMethodResult {
+    final public let methodsAvailableToAddOrUpdate: [SignicatAuthenticationSDK.SignicatAuthMethod]
+    final public let methodsAvailableToConfirm: [SignicatAuthenticationSDK.SignicatAuthMethod]
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers public class SignicatFinishAddOrUpdateResult {
+    @objc deinit
+  }
+  public func startAddOrUpdateMethod(onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AddOrUpdateManager.SignicatStartAddOrUpdateMethodResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  public func finishAddOrUpdateMethod(activationParameter: SignicatAuthenticationSDK.SignicatAuthMethod, authParameter: SignicatAuthenticationSDK.SignicatAuthMethod, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AddOrUpdateManager.SignicatFinishAddOrUpdateResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  override public init(_ encap: EncapSwiftAPI.EncapController, view: SignicatAuthenticationSDK.SignicatView)
+  @objc deinit
+}
+public enum AuthenticationSDK {
+  public static func getController(name: Swift.String) -> SignicatAuthenticationSDK.Controller
+}
+public class Controller {
+  final public let name: Swift.String
+  final public let view: SignicatAuthenticationSDK.SignicatView
+  final public let encap: EncapSwiftAPI.EncapController
+  final public let activationManager: SignicatAuthenticationSDK.ActivationManager
+  final public let authenticationManager: SignicatAuthenticationSDK.AuthenticationManager
+  final public let authorizationManager: SignicatAuthenticationSDK.AuthorizationManager
+  final public let addOrUpdateManager: SignicatAuthenticationSDK.AddOrUpdateManager
+  final public let sessionManager: SignicatAuthenticationSDK.SessionManager
+  final public let deactivationManager: SignicatAuthenticationSDK.DeactivationManager
+  public init(_ name: Swift.String)
+  public func hasToken() -> Swift.Bool
+  public func initialize(clientId: Swift.String = "", applicationId: Swift.String = "", config: SignicatAuthenticationSDK.Config? = nil, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.SignicatIntializeResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void) -> Self
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class AuthenticationManager : SignicatAuthenticationSDK.Manager {
+  public class SignicatStartAuthenticationResult {
+    final public let allowedAuthMethods: [SignicatAuthenticationSDK.SignicatAuthMethod]
+    final public let pinConfig: SignicatAuthenticationSDK.SignicatInputConfig
+    public init(_ x: EncapSwiftAPI.StartAuthenticationResult)
+    @objc deinit
+  }
+  public class SignicatFinishAuthenticationResult {
+    final public let userDetails: Swift.String?
+    final public let userCredentials: Swift.String?
+    public init(_ x: EncapSwiftAPI.FinishAuthenticationResult, context: SignicatAuthenticationSDK.SessionContext)
+    @objc deinit
+  }
+  public func startAuthentication(clientData: Swift.String? = nil, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AuthenticationManager.SignicatStartAuthenticationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  public func finishAuthentication(withAuthMethod: SignicatAuthenticationSDK.SignicatAuthMethod, tokenPurpose: EncapSwiftAPI.TokenPurpose = .none, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AuthenticationManager.SignicatFinishAuthenticationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  override public init(_ encap: EncapSwiftAPI.EncapController, view: SignicatAuthenticationSDK.SignicatView)
+  @objc deinit
+}
+extension SignicatAuthenticationSDK.AuthenticationManager {
+  public class SignicatAuthenticationResult {
+    final public let startResult: SignicatAuthenticationSDK.AuthenticationManager.SignicatStartAuthenticationResult?
+    final public let finishResult: SignicatAuthenticationSDK.AuthenticationManager.SignicatFinishAuthenticationResult?
+    public init(start: SignicatAuthenticationSDK.AuthenticationManager.SignicatStartAuthenticationResult, finish: SignicatAuthenticationSDK.AuthenticationManager.SignicatFinishAuthenticationResult)
+    @objc deinit
+  }
+  public func authenticate(withPin: Swift.String = "", useBiometrics: Swift.Bool = true, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.AuthenticationManager.SignicatAuthenticationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class PopUp : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension SignicatAuthenticationSDK.Controller {
+  public func changePin(oldCode: Swift.String? = "", newCode: Swift.String? = "", onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.SignicatAuthMethodResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+}
+@_inheritsConvenienceInitializers public class SessionManager : SignicatAuthenticationSDK.Manager {
+  @_hasMissingDesignatedInitializers public class SignicatCancelSessionResult {
+    @objc deinit
+  }
+  public func cancelSession(onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.SessionManager.SignicatCancelSessionResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  override public init(_ encap: EncapSwiftAPI.EncapController, view: SignicatAuthenticationSDK.SignicatView)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class SignicatView {
+  public func showIndicator()
+  public func hideIndicator()
+  @objc deinit
+}
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public func alert(_ text: Swift.String?, title: Swift.String = "Alert")
+  @_Concurrency.MainActor(unsafe) public func askText(_ text: Swift.String?, ok: @escaping (Swift.String) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) public func ask(_ text: Swift.String?, ok: @escaping () -> Swift.Void)
+}
+public enum MobileAPI {
+  case config(clientId: Swift.String)
+}
+extension SignicatAuthenticationSDK.MobileAPI {
+  public var apiRoot: Swift.String {
+    get
+  }
+  public var path: Swift.String {
+    get
+  }
+  public var url: Foundation.URL? {
+    get
+  }
+  public var method: Swift.String {
+    get
+  }
+  public var header: [Swift.String : Swift.String] {
+    get
+  }
+  public var body: Foundation.Data? {
+    get
+  }
+  public func encode(_ data: [Swift.String : Any]) -> Foundation.Data?
+}
+@_hasMissingDesignatedInitializers public class SignicatIntializeResult : Swift.CustomStringConvertible {
+  final public let description: Swift.String
+  final public let hasToken: Swift.Bool
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class SignicatStartResult {
+  final public let lastAttempt: Foundation.Date?
+  final public let totalAttemptsPIN: Swift.Int
+  final public let remainingAttemptsPIN: Swift.Int
+  final public let contextTitle: Swift.String?
+  final public let contextContent: Foundation.Data?
+  final public let contextMIME: Swift.String?
+  final public let pinCodeLengthMin: Swift.UInt
+  final public let pinCodeLengthMax: Swift.UInt
+  final public let pinCodeType: EncapSwiftAPI.InputType
+  final public let authMethods: Swift.Set<EncapSwiftAPI.AuthMethod>
+  @objc deinit
+}
+public class SignicatBiometricResult {
+  final public let authorized: Swift.Bool
+  public init(authorized: Swift.Bool)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class SignicatAuthMethodResult {
+  @objc deinit
+}
+public class SignicatFinishResult {
+  final public let responseType: EncapSwiftAPI.ResponseType
+  final public let contextContent: Foundation.Data?
+  final public let contextMIME: Swift.String?
+  final public let contextTitle: Swift.String?
+  final public let context: SignicatAuthenticationSDK.SessionContext?
+  public init(responseType: EncapSwiftAPI.ResponseType, contextContent: Foundation.Data?, contextMIME: Swift.String?, contextTitle: Swift.String?)
+  @objc deinit
+}
+public enum SignicatInputType {
+  case any
+  case numeric
+  case alpha
+  case alphaNumeric
+  public static func make(_ type: EncapSwiftAPI.InputType) -> SignicatAuthenticationSDK.SignicatInputType
+  public static func == (a: SignicatAuthenticationSDK.SignicatInputType, b: SignicatAuthenticationSDK.SignicatInputType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum SignicatAuthMethod : Swift.Hashable {
+  case unknown
+  case device
+  case pin(value: Swift.String)
+  case touchID(prompt: Swift.String?)
+  case strongTouchID(prompt: Swift.String?)
+  case faceID
+  case offlineDevice
+  case offlinePin(value: Swift.String)
+  case offlineStrongTouchID(prompt: Swift.String?)
+  case offlineFaceID
+  public static func make(_ type: EncapSwiftAPI.AuthMethod) -> SignicatAuthenticationSDK.SignicatAuthMethod
+  public func toAuthMethod() -> EncapSwiftAPI.AuthMethod
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: SignicatAuthenticationSDK.SignicatAuthMethod, b: SignicatAuthenticationSDK.SignicatAuthMethod) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public class SignicatInputConfig {
+  final public let lengthMin: Swift.UInt
+  final public let lengthMax: Swift.UInt
+  final public let codeType: SignicatAuthenticationSDK.SignicatInputType
+  public init(min: Swift.UInt, max: Swift.UInt, type: EncapSwiftAPI.InputType)
+  public init(_ x: EncapSwiftAPI.LoadConfigResult)
+  @objc deinit
+}
+extension SignicatAuthenticationSDK.ActivationManager {
+  public func hasBiometrics()
+  public func addBiometrics(withCode: Swift.String? = "", onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.SignicatBiometricResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+}
+@_inheritsConvenienceInitializers public class ActivationManager : SignicatAuthenticationSDK.Manager {
+  public class SignicatStartActivationResult {
+    final public let registrationId: Swift.String?
+    final public let serverConfiguredAuthMethods: Swift.Set<Swift.String>
+    final public let pinConfig: SignicatAuthenticationSDK.SignicatInputConfig
+    final public let deviceAllowedAuthMethods: [SignicatAuthenticationSDK.SignicatAuthMethod]
+    public init(start: EncapSwiftAPI.StartActivationResult)
+    @objc deinit
+  }
+  public class SignicatFinishActivationResult {
+    final public let postOperationContext: SignicatAuthenticationSDK.SessionContext?
+    public init(finish: EncapSwiftAPI.FinishActivationResult)
+    @objc deinit
+  }
+  public func loadActivationConfig(onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.SignicatInputConfig, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  public func startActivation(withCode: Swift.String, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.ActivationManager.SignicatStartActivationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  public func finishActivation(withAuthMethod: SignicatAuthenticationSDK.SignicatAuthMethod, tokenPurpose: EncapSwiftAPI.TokenPurpose, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.ActivationManager.SignicatFinishActivationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+  override public init(_ encap: EncapSwiftAPI.EncapController, view: SignicatAuthenticationSDK.SignicatView)
+  @objc deinit
+}
+extension SignicatAuthenticationSDK.ActivationManager {
+  public class SignicatActivationResult {
+    final public let startResult: SignicatAuthenticationSDK.ActivationManager.SignicatStartActivationResult
+    final public let finishResult: SignicatAuthenticationSDK.ActivationManager.SignicatFinishActivationResult
+    final public let biometricsResult: SignicatAuthenticationSDK.SignicatBiometricResult?
+    public init(start: SignicatAuthenticationSDK.ActivationManager.SignicatStartActivationResult, finish: SignicatAuthenticationSDK.ActivationManager.SignicatFinishActivationResult, biometric: SignicatAuthenticationSDK.SignicatBiometricResult?)
+    @objc deinit
+  }
+  public func activate(withCode: Swift.String? = "", withPin: Swift.String = "", activateBiometrics: Swift.Bool = true, onCompletion: @escaping (Swift.Result<SignicatAuthenticationSDK.ActivationManager.SignicatActivationResult, SignicatAuthenticationSDK.AuthenticationSDKError>) -> Swift.Void)
+}
+public struct Config : Swift.Decodable {
+  public var serverURL: Swift.String
+  public var applicationId: Swift.String
+  public var publicKey: Swift.String
+  public init(clientID: Swift.String, applicationId: Swift.String)
+  public init()
+  public init(remote: SignicatAuthenticationSDK.RemoteConfig)
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct RemoteConfig : Swift.Decodable {
+  public init(from decoder: Swift.Decoder) throws
+}
+public class SessionContext : Swift.Decodable {
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+extension SignicatAuthenticationSDK.SessionContext {
+  public static func decode(data: Foundation.Data?, title: Swift.String?) -> SignicatAuthenticationSDK.SessionContext?
+}
+public class Manager {
+  final public let encap: EncapSwiftAPI.EncapController
+  final public let view: SignicatAuthenticationSDK.SignicatView
+  public init(_ encap: EncapSwiftAPI.EncapController, view: SignicatAuthenticationSDK.SignicatView)
+  @objc deinit
+}
+extension SignicatAuthenticationSDK.ClientErrorCodes : Swift.Equatable {}
+extension SignicatAuthenticationSDK.ClientErrorCodes : Swift.Hashable {}
+extension SignicatAuthenticationSDK.ServerErrorCodes : Swift.Equatable {}
+extension SignicatAuthenticationSDK.ServerErrorCodes : Swift.Hashable {}
+extension SignicatAuthenticationSDK.SignicatInputType : Swift.Equatable {}
+extension SignicatAuthenticationSDK.SignicatInputType : Swift.Hashable {}

@@ -1,0 +1,4 @@
+framework module SignicatAuthenticationSDK {
+  header "SignicatAuthenticationSDK-Swift.h"
+  requires objc
+}
